@@ -1,0 +1,101 @@
+{
+  "@odata.count": 8,
+  "value": [
+    {
+      "id": "12779993",
+      "organizationId": 430308,
+      "organizationName": "SIGMA LAMBDA BETA",
+      "name": "Sigma Lambda Beta Pie/Splash a Bro Fundraiser",
+      "description": "<p>Tabling in Turlington. Funds will be used for future programming.</p>",
+      "location": "Plaza of The Americas",
+      "startsOn": "2026-09-18T14:00:00+00:00",
+      "endsOn": "2026-09-18T18:00:00+00:00",
+      "status": "Approved",
+      "visibility": "Public"
+    },
+    {
+      "id": "gc-food-1",
+      "organizationId": 429964,
+      "organizationName": "3D Printing Club",
+      "name": "Workshop GBM",
+      "description": "<p>Join 3DPC in Little Hall 101. FREE PIZZA will be provided.</p>",
+      "location": "Little Hall 101",
+      "startsOn": "2026-09-18T22:30:00+00:00",
+      "endsOn": "2026-09-18T23:30:00+00:00",
+      "status": "Approved",
+      "visibility": "Public"
+    },
+    {
+      "id": "gc-nofood-1",
+      "organizationId": 430308,
+      "organizationName": "SIGMA LAMBDA BETA",
+      "name": "Study Session",
+      "description": "<p>Bring your notes. No food mentioned.</p>",
+      "location": "Library West",
+      "startsOn": "2026-09-18T21:00:00+00:00",
+      "endsOn": "2026-09-18T22:00:00+00:00",
+      "status": "Approved",
+      "visibility": "Public"
+    },
+    {
+      "id": "gc-noend-1",
+      "organizationId": 429964,
+      "organizationName": "3D Printing Club",
+      "name": "Open Lab",
+      "description": "<p>Drop by the lab.</p>",
+      "location": "Weil 270",
+      "startsOn": "2026-09-19T16:00:00+00:00",
+      "endsOn": null,
+      "status": "Approved",
+      "visibility": "Public"
+    },
+    {
+      "id": "gc-unmapped-1",
+      "organizationId": 999999999,
+      "organizationName": "Unknown Student Org",
+      "name": "Mixer",
+      "description": "<p>Come hang out.</p>",
+      "location": "Reitz Union 2355",
+      "startsOn": "2026-09-18T23:00:00+00:00",
+      "endsOn": "2026-09-19T00:00:00+00:00",
+      "status": "Approved",
+      "visibility": "Public"
+    },
+    {
+      "id": "gc-loc-1",
+      "organizationId": 430308,
+      "organizationName": "SIGMA LAMBDA BETA",
+      "name": "Chapter Meeting",
+      "description": "<p>Regular meeting.</p>",
+      "location": "Turlington 2305",
+      "startsOn": "2026-09-20T22:00:00+00:00",
+      "endsOn": "2026-09-20T23:00:00+00:00",
+      "status": "Approved",
+      "visibility": "Public"
+    },
+    {
+      "id": "gc-cancel-1",
+      "organizationId": 429964,
+      "organizationName": "3D Printing Club",
+      "name": "Cancelled Demo",
+      "description": "<p>This demo has been cancelled.</p>",
+      "location": "Weil 270",
+      "startsOn": "2026-09-21T22:00:00+00:00",
+      "endsOn": "2026-09-21T23:00:00+00:00",
+      "status": "Cancelled",
+      "visibility": "Public"
+    },
+    {
+      "id": "gc-food-unknown-1",
+      "organizationId": 430308,
+      "organizationName": "SIGMA LAMBDA BETA",
+      "name": "Social with pizza",
+      "description": "<p>We'll have pizza and talk about the semester.</p>",
+      "location": "Reitz Union 2365",
+      "startsOn": "2026-09-18T23:00:00+00:00",
+      "endsOn": "2026-09-19T01:00:00+00:00",
+      "status": "Approved",
+      "visibility": "Public"
+    }
+  ]
+}

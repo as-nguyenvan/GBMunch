@@ -4,11 +4,30 @@ from datetime import datetime, timezone
 from typing import Callable
 
 from gatorgrub.deduplication.matcher import EventDeduplicator
-from gatorgrub.domain.models import FoodEvent, RawEventCandidate
+from gatorgrub.domain.models import EventLocation, FoodEvent, RawEventCandidate
 from gatorgrub.extraction.extractor import DeterministicExtractor, Extractor
 from gatorgrub.ingestion.adapters import PastedTextAdapter
 from gatorgrub.storage.repository import Repository
 from gatorgrub.verification.verifier import EventVerifier
+
+
+def apply_structured_source_fields(event: FoodEvent, candidate: RawEventCandidate) -> FoodEvent:
+    meta = candidate.metadata
+    if name := meta.get("event_name"):
+        event.event_name = name
+    if org := meta.get("organization_name"):
+        event.organization = org
+    if "canonical_organization_id" in meta:
+        event.canonical_organization_id = meta.get("canonical_organization_id")
+    if "source_organization_id" in meta:
+        event.source_organization_id = meta.get("source_organization_id")
+    if meta.get("structured_start") is not None:
+        event.start_time = meta["structured_start"]
+    if "structured_end" in meta:
+        event.end_time = meta.get("structured_end")
+    if location := meta.get("structured_location"):
+        event.location = EventLocation(raw_text=str(location))
+    return event
 
 
 class ProcessingPipeline:
@@ -29,7 +48,10 @@ class ProcessingPipeline:
         return self._process(candidate, now=self._clock())
 
     def _process(self, candidate: RawEventCandidate, *, now: datetime) -> FoodEvent:
-        event = self.verifier.verify(self.extractor.extract(candidate), now=now)
+        event = self.verifier.verify(
+            apply_structured_source_fields(self.extractor.extract(candidate), candidate),
+            now=now,
+        )
         for existing in self.repository.list():
             if existing.event_id == event.event_id:
                 return existing

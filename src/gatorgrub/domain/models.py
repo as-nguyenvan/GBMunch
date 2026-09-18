@@ -185,6 +185,8 @@ class FoodEvent(StrictModel):
     availability: AvailabilityStatus = AvailabilityStatus.UNKNOWN
     availability_confirmed_at: datetime | None = None
     conflicts: list[str] = Field(default_factory=list)
+    canonical_organization_id: str | None = None
+    source_organization_id: str | None = None
 
     _times_local = field_validator("start_time", "end_time", "availability_confirmed_at", mode="after")(_localize_naive)
 

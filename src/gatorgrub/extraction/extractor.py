@@ -23,7 +23,8 @@ class DeterministicExtractor:
 
     _orgs = ["Gator AI", "ACM", "Women in CS", "SHPE", "Gator Robotics", "History Club",
              "Data Science", "Vegan Club", "ISA", "Astronomy", "Pre-Law", "Math Society"]
-    _foods = ["Chick-fil-A", "sandwiches", "burritos", "bagels", "cookies", "snacks", "pizza", "tacos", "subs", "pasta"]
+    _foods = ["Chick-fil-A", "sandwiches", "burritos", "bagels", "cookies", "snacks", "pizza", "tacos", "subs", "pasta",
+              "breakfast", "lunch", "dinner"]
 
     def __init__(self, reference_time: datetime | None = None):
         self.reference_time = reference_time
@@ -113,9 +114,9 @@ class DeterministicExtractor:
 
     @staticmethod
     def _has_explicit_free_food(text: str) -> bool:
-        food = r"(?:pizza|food|snacks?|sandwiches?|tacos?|subs?|burritos?|pasta|chick-fil-a|bagels?|cookies?)"
+        food = r"(?:pizza|food|snacks?|sandwiches?|tacos?|subs?|burritos?|pasta|chick-fil-a|bagels?|cookies?|breakfast|lunch|dinner)"
         claim = re.compile(
-            rf"(?<![-\w])free\s+(?:(?:vegan|vegetarian)\s+(?:and\s+)?){{0,2}}(?P<food>{food})\b"
+            rf"(?<![-\w])(?:free|complimentary)\s+(?:(?:vegan|vegetarian)\s+(?:and\s+)?){{0,2}}(?P<food>{food})\b"
         )
         hedge = re.compile(r"\b(?:maybe|might|may|could|hopefully|possibly)\b")
         historical = re.compile(

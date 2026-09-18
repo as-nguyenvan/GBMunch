@@ -103,6 +103,29 @@ def test_extractor_rejects_negated_or_contradicted_free_food_claims():
     assert direct.food.free_food is TriState.YES
 
 
+def test_extractor_recognizes_explicit_free_meals_but_not_bare_meal_words():
+    extractor = DeterministicExtractor(reference_time=REF)
+
+    def extract(phrase: str):
+        return extractor.extract(PastedTextAdapter().ingest(
+            f"Gator AI GBM tomorrow at 6 PM in Little 101. {phrase}",
+            retrieved_at=REF,
+        ))
+
+    for phrase in ("enjoy free dinner", "free lunch", "free breakfast", "complimentary dinner"):
+        assert extract(phrase).food.free_food is TriState.YES, phrase
+
+    for phrase in ("dinner provided", "lunch available"):
+        assert extract(phrase).food.free_food is TriState.UNKNOWN, phrase
+
+    paid = extract("bring $5 for dinner")
+    assert paid.food.free_food is not TriState.YES
+
+    historical = extract("last week's free dinner was awesome")
+    assert historical.food.free_food is TriState.UNKNOWN
+
+
+
 def test_extractor_keeps_hedged_historical_and_paid_free_food_claims_unknown():
     extractor = DeterministicExtractor(reference_time=REF)
     phrases = (

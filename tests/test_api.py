@@ -134,3 +134,29 @@ def test_api_detail_and_confirm_apply_effective_expiration():
     })
     assert detail.json()["verification_status"] == "expired"
     assert confirmed.json()["verification_status"] == "expired"
+
+
+def test_events_feed_can_collapse_series_without_changing_canonical_records():
+    tz = ZoneInfo("America/New_York")
+    now = datetime(2026, 9, 17, 12, tzinfo=tz)
+    repo = InMemoryEventRepository(clock=lambda: now)
+    for index, day in enumerate((23, 30)):
+        repo.add(FoodEvent(
+            event_id=f"gbm-{index}",
+            organization="FBLS",
+            event_name="GBM",
+            start_time=datetime(2026, 9, day, 18, 30, tzinfo=tz),
+            location=EventLocation(raw_text="Heavener 260", building="Heavener", room="260"),
+            food=FoodInfo(free_food=TriState.YES, free_food_evidence=EvidenceLevel.EXPLICIT),
+            attendance=AttendanceInfo(open_to_all=TriState.YES, evidence=EvidenceLevel.EXPLICIT),
+            canonical_organization_id="gc-1",
+        ))
+    web = TestClient(create_app(repo, clock=lambda: now))
+    raw = web.get("/events").json()
+    collapsed = web.get("/events", params={"collapse_series": True}).json()
+    assert len(raw) == 2
+    assert len(collapsed) == 1
+    assert collapsed[0]["occurrence_count"] == 2
+    assert collapsed[0]["next_event_id"] == "gbm-0"
+    assert len(repo.list()) == 2
+

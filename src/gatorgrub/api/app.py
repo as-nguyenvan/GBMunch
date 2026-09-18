@@ -3,12 +3,13 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Annotated, Callable
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, Query, status
 from pydantic import BaseModel, ConfigDict, StringConstraints
 
 from gatorgrub.domain.models import AvailabilityStatus, FoodEvent, SearchPreferences
 from gatorgrub.pipeline import ProcessingPipeline
 from gatorgrub.recommendation.ranker import RankedEvent
+from gatorgrub.recommendation.series import SeriesFeedItem, collapse_event_series
 from gatorgrub.storage.repository import InMemoryEventRepository, Repository
 from gatorgrub.verification.verifier import is_publishable
 
@@ -37,9 +38,12 @@ def create_app(repository: Repository | None = None,
     def health() -> dict[str, str]:
         return {"status": "ok"}
 
-    @app.get("/events", response_model=list[FoodEvent])
-    def events() -> list[FoodEvent]:
-        return [event for event in repo.list() if is_publishable(event)]
+    @app.get("/events")
+    def events(collapse_series: bool = Query(default=False)) -> list[FoodEvent] | list[SeriesFeedItem]:
+        publishable = [event for event in repo.list() if is_publishable(event)]
+        if collapse_series:
+            return collapse_event_series(publishable, now=clock())
+        return publishable
 
     @app.get("/events/{event_id}", response_model=FoodEvent)
     def event(event_id: str) -> FoodEvent:

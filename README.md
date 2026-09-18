@@ -1,15 +1,6 @@
 # GBMunch
 
-UF free-food event discovery prototype (**pre-acquisition baseline**).
-
-This freeze includes:
-- validated offline backend (Hermes repair pass)
-- canonical GatorConnect organization registry (emails redacted)
-- public event-source registry seed
-
-Not production-ready. No live event scraping in this baseline.
-
-## Backend prototype
+UF free-food event discovery MVP baseline (GatorConnect acquisition + offline core).
 
 
 GatorGrub turns heterogeneous campus announcements into a conservative, searchable free-food event feed. This prototype is fully offline: it uses synthetic UF-style fixtures, deterministic extraction/verification/deduplication/ranking, in-memory persistence, and a thin FastAPI boundary.
@@ -54,6 +45,23 @@ Key modules:
 - `storage/repository.py`: repository protocol and in-memory implementation
 - `pipeline.py`: source-neutral end-to-end processing service
 - `api/app.py`: HTTP boundary only
+- `acquisition/gatorconnect.py`: public GatorConnect Events listing client
+- `ingestion/gatorconnect.py`: listing payload → `RawEventCandidate`
+- `registry/organizations.py`: exact GatorConnect organization ID lookup
+
+## GatorConnect Events (first live source)
+
+Public JSON listing, unauthenticated:
+
+`GET https://gatorconnect.ufl.edu/api/discovery/event/search?top=10&skip=N`
+
+Page size is 10 even if `top` is larger. The client paginates with `skip` and a short delay. Event detail is not fetched (it can include personal emails). Organization identity is joined by exact GatorConnect `organizationId` → registry `gc-{id}`; unknown IDs stay unmapped.
+
+```bash
+.venv/bin/python -m gatorgrub.acquisition --process
+.venv/bin/python -m gatorgrub.acquisition --from-fixture tests/fixtures/gatorconnect_events.json --process --registry tests/fixtures/organizations_sample.jsonl
+```
+
 
 ## Add a future acquisition source
 
@@ -93,10 +101,11 @@ Health and feed:
 ```bash
 curl http://127.0.0.1:8000/health
 curl http://127.0.0.1:8000/events
+curl 'http://127.0.0.1:8000/events?collapse_series=true'
 curl http://127.0.0.1:8000/events/evt_abc123
 ```
 
-`GET /events` is the public feed and returns only `trusted` and `likely` events. Other verification states remain stored and can still be inspected by ID. List, detail, search, ingest/update responses, and availability confirmations all apply verification against the repository's current clock, so an ended event cannot retain a stale trusted response.
+`GET /events` is the public feed and returns only `trusted` and `likely` events. Other verification states remain stored and can still be inspected by ID. `collapse_series=true` groups repeated same-org/title/location occurrences into a presentation object (`next_event_id`, `occurrence_count`, `upcoming_dates`) without merging canonical `FoodEvent` records. Search still operates on individual instances. List, detail, search, ingest/update responses, and availability confirmations all apply verification against the repository's current clock, so an ended event cannot retain a stale trusted response.
 
 Ingest pasted text:
 
@@ -167,6 +176,7 @@ The demo fixes the reference time at noon on September 17, 2026, so it remains s
 - Events expire only at an **explicit** end time. Unknown `end_time` remains canonical `null`. Verification and ranking may use a labeled two-hour heuristic interval (`EndTimeBasis.HEURISTIC_DEFAULT`) without writing that guess into the event. After the assumed window elapses, unknown-end events become `review_needed`, not confidently `expired`.
 - Search uses interval overlap and requires at least `min_useful_minutes` of overlap (default 15). Set `0` to restore raw overlap.
 - Hedged, historical, paid, or restricted free-food language stays unknown; restricted offers require review rather than an unconditional `free_food=yes`.
+- Explicit `free`/`complimentary` breakfast, lunch, or dinner is treated as free-food evidence; bare meal words are not.
 - Event status is recency- and evidence-aware: a newer explicit reinstatement overrides a stale cancellation; equal-timestamp status disagreement requires review.
 - Contradictory explicit rooms/buildings block automatic merge unless a shared source identity is present.
 - Unresolved dates and missing free-food evidence reject; conflicts, ambiguous locations, and sources older than 14 days require review.

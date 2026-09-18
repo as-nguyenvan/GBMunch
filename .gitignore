@@ -19,3 +19,8 @@ build/
 htmlcov/
 .idea/
 .vscode/
+
+# Live acquisition artifacts (may contain personal emails / bulky dumps)
+demo/gatorconnect_live_raw.json
+demo/gatorconnect_live_report.json
+**/gatorconnect_live_*.json
