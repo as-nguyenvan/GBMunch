@@ -1,0 +1,22 @@
+[
+  {"case":"explicit_free_pizza","text":"Gator AI GBM on September 18, 2026 from 6:30 PM-7:30 PM at Little Hall 101. FREE PIZZA 🍕 Open to all!"},
+  {"case":"pizza_free_unknown","text":"ACM GBM on September 18, 2026 at 7 PM in CSE E221. We'll have pizza."},
+  {"case":"emoji_only","text":"Come hang out tomorrow! 🍕🔥 Turlington 2305 at 6 PM."},
+  {"case":"food_provided","text":"Women in CS Mixer September 18, 2026 5 PM at Reitz Union 2355. Food provided."},
+  {"case":"tomorrow","text":"SHPE study night tomorrow at 6:15 PM in Marston L136. Free snacks."},
+  {"case":"missing_end","text":"Gator Robotics demo September 18, 2026 at 6 PM in Weil 270. Free sandwiches."},
+  {"case":"missing_org","text":"Study break September 18, 2026 at 4 PM at Library West. Free cookies."},
+  {"case":"ambiguous_location","text":"Engineering social September 18, 2026 at 5 PM near the Reitz. Free tacos."},
+  {"case":"cancelled","text":"UPDATE: Gator AI GBM September 18, 2026 at 6 PM in Little 101 has been cancelled. Free pizza."},
+  {"case":"past","text":"History Club lunch September 10, 2026 at noon in Flint 50. Free subs."},
+  {"case":"conflicting_times","text":"Data Science GBM September 18, 2026 at 5 PM, correction: 7 PM, CSE E119. Free pizza."},
+  {"case":"explicit_dietary","text":"Vegan Club dinner September 18, 2026 at 5:30 PM in Reitz 2365. Free vegan and vegetarian burritos."},
+  {"case":"absent_dietary","text":"ISA social September 18, 2026 at 6 PM in Pugh 170. Free Chick-fil-A."},
+  {"case":"open_all","text":"Astronomy night September 18, 2026 at 8 PM at Bryant Space Center. Free snacks. Everyone welcome."},
+  {"case":"members_only","text":"Pre-Law member dinner September 18, 2026 at 6 PM in Matherly 18. Free pasta. Members only."},
+  {"case":"duplicate_a","text":"Gator AI General Body Meeting September 18, 2026 at 5:30 PM in Little 101. Free pizza."},
+  {"case":"duplicate_b","text":"Gator AI GBM Sept 18 2026 5:35 PM, Little Hall room 101 — FREE PIZZA!"},
+  {"case":"no_food","text":"Math Society lecture September 18, 2026 at 5 PM in LIT 125."},
+  {"case":"leftover_alert","text":"Leftover alert! Free bagels now at Marston lobby while supplies last. September 18, 2026 4:30 PM."},
+  {"case":"low_info","text":"Pull up tonight maybe food 👀"}
+]
