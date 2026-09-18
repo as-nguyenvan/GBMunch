@@ -1,0 +1,31 @@
+source_id,name,base_url,source_type,scope,authority,priority,access_method,structured,requires_auth,food_signal_observed,reachable,http_status,notes
+uf-main-calendar,UF Main Calendar,https://calendar.ufl.edu/,central_calendar,campus_wide,official_uf,high,html,False,False,False,False,403,calendar.ufl.edu returns 403 to automated clients; treat as high-value but access-constrained. Manual/browser or official feed may be required.
+uf-student-engagement,UF Student Engagement,https://studentengagement.ufl.edu/,student_affairs,campus_wide,official_uf,high,html,False,False,False,True,200,Student Engagement home / programs
+uf-gatornights,GatorNights,https://union.ufl.edu/gatornights/,programming,campus_wide,official_uf,high,html,False,False,True,True,200,Weekend late-night programming; frequent free food
+uf-great-gator-welcome,Great Gator Welcome,https://welcome.ufl.edu/,orientation,campus_wide,official_uf,medium,html,False,False,True,True,200,Welcome week / new student events (seasonal)
+uf-reitz-union,Reitz Union,https://union.ufl.edu/,venue_programming,campus_wide,official_uf,high,html,False,False,True,True,200,Union events and programs
+uf-student-government,UF Student Government,https://sg.ufl.edu/,student_government,campus_wide,official_uf,medium,html,False,False,False,True,200,SG events and announcements
+uf-career-connections,Career Connections Center,https://career.ufl.edu/,career,campus_wide,official_uf,high,html,False,False,False,True,200,Career events; often food at workshops/fairs
+uf-careerhub,Handshake / CareerHub,https://ufl.joinhandshake.com/,career_platform,campus_wide,official_uf,medium,html,True,True,False,True,200,May require login for full event lists
+uf-libraries,UF Libraries Events,https://uflib.ufl.edu/,libraries,campus_wide,official_uf,medium,html,False,False,False,True,200,Library workshops and events
+uf-leadership-service,UF Leadership & Service,https://leadershipandservice.ufl.edu/,student_affairs,campus_wide,official_uf,medium,html,False,False,False,True,200,Replaces unresolved SFL hostname; SFL dedicated host did not resolve during validation. Greek chapter events still better via org IG/GatorConnect.
+gatorconnect-events,GatorConnect Events,https://gatorconnect.ufl.edu/events,org_platform_events,campus_wide,official_uf,high,html,True,False,False,True,200,Platform event listings for registered orgs; listing pages may require soft login
+eng-calendar,Herbert Wertheim College of Engineering Events,https://www.eng.ufl.edu/students/events/,college_calendar,college,official_uf,high,html,False,False,True,True,200,Engineering college events
+clas-news-events,CLAS News & Events,https://clas.ufl.edu/,college_calendar,college,official_uf,high,html,False,False,False,True,200,College of Liberal Arts & Sciences
+warrington-events,Warrington College of Business Events,https://warrington.ufl.edu/events/,college_calendar,college,official_uf,high,html,False,False,True,True,200,Business college events
+arts-events,College of the Arts Events,https://arts.ufl.edu/events/,college_calendar,college,official_uf,medium,html,False,False,False,True,200,Arts performances and events
+honors-events,UF Honors Events,https://www.honors.ufl.edu/,college_calendar,program,official_uf,medium,html,False,False,False,True,200,Honors program site; events often listed on pages/news
+multicultural-engagement,Multicultural & Diversity Affairs / IIC,https://multicultural.ufl.edu/,cultural_center,campus_wide,official_uf,high,html,False,False,False,True,200,Cultural center programming
+graduate-school-events,UF Graduate School Events,https://grad.ufl.edu/,graduate,graduate,official_uf,medium,html,False,False,False,True,200,Graduate events
+ifas-events,UF/IFAS Events,https://calendar.ifas.ufl.edu/,college_calendar,college,official_uf,medium,html,False,False,False,True,200,IFAS calendar
+phhp-events,PHHP Events,https://phhp.ufl.edu/,college_calendar,college,official_uf,medium,html,False,False,True,True,200,Public Health & Health Professions
+journalism-events,College of Journalism Events,https://www.jou.ufl.edu/,college_calendar,college,official_uf,low,html,False,False,True,True,200,CJC homepage/events
+education-events,College of Education Events,https://education.ufl.edu/events/,college_calendar,college,official_uf,medium,html,False,False,False,True,200,Education college
+hhp-events,Health & Human Performance Events,https://hhp.ufl.edu/,college_calendar,college,official_uf,medium,html,False,False,False,True,200,HHP
+cpet-events,Center for Undergraduate Research,https://cur.aa.ufl.edu/,institute,campus_wide,official_uf,medium,html,False,False,False,True,200,Undergraduate research events
+uf-icdc,International Center,https://internationalcenter.ufl.edu/,cultural_center,campus_wide,official_uf,medium,html,False,False,False,True,200,International student programming
+reddit-ufl,r/ufl,https://www.reddit.com/r/ufl/,community_forum,campus_wide,community,medium,html,False,False,False,True,200,Community tips; noisy; verify before trusting food claims
+eventbrite-uf,Eventbrite UF search,https://www.eventbrite.com/d/fl--gainesville/university-of-florida/,aggregator,local,community,low,html,True,False,True,True,200,Public Eventbrite listings near UF; filter carefully
+uf-news,UF News Events,https://news.ufl.edu/,news,campus_wide,official_uf,low,html,False,False,False,True,200,Newsroom; occasional event coverage
+recsports,UF RecSports,https://recsports.ufl.edu/,recreation,campus_wide,official_uf,medium,html,False,False,False,True,200,UF RecSports; TLS certificate verification failed on stock Python without CERT_NONE
+uf-museum-natural-history,Florida Museum Events,https://www.floridamuseum.ufl.edu/events/,museum,campus_adjacent,official_uf,low,html,False,False,False,True,200,Museum public events
